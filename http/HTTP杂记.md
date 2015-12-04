@@ -60,11 +60,11 @@ https://www.baidu.com/
 
 1. HTTP请求行
 
-组成部分
+    组成部分
 
-```
-请求方法 URI HTTP版本
-```
+	```
+	请求方法 URI HTTP版本
+	```
 
 1. HTTP消息报头
 
@@ -76,9 +76,9 @@ HTTP响应也是由三个部分组成，分别是：状态行、消息报头、�
 
 1. 状态行
 
-```
-HTTP-Version Status-Code Reason-Phrase CRLF
-```
+	```
+	HTTP-Version Status-Code Reason-Phrase CRLF
+	```
 
 1. 消息报头
 
