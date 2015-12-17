@@ -44,20 +44,22 @@ sb.append("Greetings");
 
 ## 设置长度和容量
 
-1.   `void setLength(int newLength)` 设置字符序列的长度，如果newLength小于length()的返回值，则多余的字符将被舍弃。如果newLength大于length()，则多余的位置会被置为`'\0'`，源码：   
-
-        ::java
-        public void setLength(int newLength) {
-            if (newLength < 0)
-                throw new StringIndexOutOfBoundsException(newLength);
-            ensureCapacityInternal(newLength);
-
-            if (count < newLength) {
-                Arrays.fill(value, count, newLength, '\0');
-            }
-
-            count = newLength;
-        }
+1.   `void setLength(int newLength)` 设置字符序列的长度，如果newLength小于length()的返回值，则多余的字符将被舍弃。如果newLength大于length()，则多余的位置会被置为`'\0'`（见此方法源码）
 
 2. `void ensureCapacity(int minCapacity)` 确保capacity至少为minCapacity
 
+
+__setLength(int)源码__
+```java
+public void setLength(int newLength) {
+    if (newLength < 0)
+        throw new StringIndexOutOfBoundsException(newLength);
+    ensureCapacityInternal(newLength);
+
+    if (count < newLength) {
+        Arrays.fill(value, count, newLength, '\0');
+    }
+
+    count = newLength;
+}
+```
