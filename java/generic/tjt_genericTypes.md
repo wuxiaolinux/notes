@@ -51,7 +51,7 @@ public class Box<T> {
 }
 ```
 
-> `T`可是是任何类、接口、数组类型或另一个类型变量，但不允许是基础类型。
+> `T`可以是任何类、接口、数组类型或另一个类型变量，但不允许是基础类型。
 
 ## 类型参数命名惯例
 
@@ -93,7 +93,7 @@ Box<Integer> box;
 
 > 你可以将泛型调用看做是普通的方法调用，但你传递的是类型参数（type argument）而不是一个普通参数。比如上面的例子，传递的类型参数就是`Integer`。
 
-**关于术语parameter与argument的区别**
+**关于术语parameter与argument的区别：**
 <br/>
 > **Type Parameter and Type Argument Terminology**: Many developers use the terms "type parameter" and "type argument" interchangeably, but these terms are not the same. When coding, one provides type arguments in order to create a parameterized type. Therefore, the `T` in `Foo<T>` is a type parameter and the `String` in `Foo<String> f` is a type argument.
 
@@ -111,4 +111,53 @@ Box<Integer> box = new Box<Integer>();
 
 > 在 Java SE 7 以后，上面的例子可以改写为`Box<Integer> box = new Box<>();`
 
-TODO...
+## 多类型参数
+
+泛型可以具有多个类型参数，比如：
+
+```java
+public interface Pair<K, V> {
+	public K getKey();
+	public V getValue();
+}
+```
+
+提供实现类`OrderedPair`：
+
+```java
+public class OrderedPair<K, V> implements Pair<K, V> {
+	
+	private K key;
+	private V value;
+
+	public OrderedPair(K key, V value) {
+		this.key = key;
+		this.value = value;
+	}
+
+	public K getKey() {
+		return key;
+	}
+
+	public V getValue() {
+		return value;
+	}
+}
+```
+
+创建两个`OrderedPair`实例：
+
+```java
+Pair<String, Integer> p1 = new OrderedPair<String, Integer>("Even", 8);
+Pair<String, String>  p2 = new OrderedPair<String, String>("hello", "world");
+```
+
+实例化`p1`时，`K`是`String`，`V`是`Integer`。实例化`p2`时，`K`是`String`，`V`是`String`。
+
+## 参数化类型
+
+在实例化一个泛型时，可以使用另一个泛型作为这个泛型的一个类型参数，比如：
+
+```java
+OrderedPair<String, Box<Integer>> p = new OrderedPair<>("primes", new Box<Integer>());
+```
